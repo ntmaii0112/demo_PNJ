@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
     public function showForm()
     {
         return view('auth.register');

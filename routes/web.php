@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 /*
@@ -18,3 +19,7 @@ use App\Http\Controllers\User\RegisterController;
 //});
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/check-email', [RegisterController::class, 'checkEmail'])->name('check-email');
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
