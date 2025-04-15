@@ -12,11 +12,17 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         Log::info('Hiển thị trang quản lý category');
-        $Category = Category::active()->orderBy('id','desc')->paginate(10);
-        return view('admin.category.index',compact('Category'));
+
+        $search = $request->query('search');
+        $Category = Category::when($search, function ($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })->paginate(10);
+
+//        $Category = Category::active()->orderBy('id','desc')->paginate(10);
+        return view('admin.category.index',compact('Category','search'));
     }
 
     /**
