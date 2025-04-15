@@ -23,3 +23,11 @@ Route::post('/check-email', [RegisterController::class, 'checkEmail'])->name('ch
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+use App\Http\Controllers\User\UserRoleController;
+
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/admin/role',[UserRoleController::class,'index'])->name('admin.index');
+    Route::post('/admin/role/{user}/addRole',[UserRoleController::class,'addRole'])->name('admin.addRole');
+    Route::delete('/admin/role/{user}/removeRole/{role}',[UserRoleController::class,'removeRole'])->name('admin.removeRole');
+});
