@@ -31,3 +31,9 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::post('/admin/role/{user}/addRole',[UserRoleController::class,'addRole'])->name('admin.addRole');
     Route::delete('/admin/role/{user}/removeRole/{role}',[UserRoleController::class,'removeRole'])->name('admin.removeRole');
 });
+
+use App\Http\Controllers\Admin\CategoryController;
+Route::middleware(['auth', 'is_admin'])->group(function (){
+    Route::resource('/admin/category', CategoryController::class);
+});
+
