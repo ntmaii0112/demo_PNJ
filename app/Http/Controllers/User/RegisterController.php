@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\UserRegister;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
@@ -39,7 +41,12 @@ class RegisterController extends Controller
 
         if ($user) {
             Log::info("Register success for user: {$user->email}");
+
+            Log::info('Send mail register');
+            event(new UserRegister($user));
+
             return redirect()->route('login')->with('success', 'Register success!');
+
         } else {
             Log::error("Register failed");
             return back()->with('error', 'Đăng ký thất bại. Vui lòng thử lại!');
