@@ -20,4 +20,8 @@ class Category extends Model
         return $this->update(['del_flag' => true]);
     }
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
 }

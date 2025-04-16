@@ -37,3 +37,11 @@ Route::middleware(['auth', 'is_admin'])->group(function (){
     Route::resource('/admin/category', CategoryController::class);
 });
 
+use App\Http\Controllers\Admin\ProductController;
+Route::middleware(['auth', 'is_admin'])->group(function (){
+    Route::resource('/admin/product', ProductController::class);
+});
+
+use App\Http\Controllers\ProductPublicController;
+Route::get('/products',[ProductPublicController::class,'index'])->name('products.public');
+Route::get('/products/{product}',[ProductPublicController::class,'show'])->name('products.public.show');

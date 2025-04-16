@@ -3,15 +3,7 @@
 @section('content')
     <div class="container">
         <h2 class="mb-4">Quản lý danh mục</h2>
-
-        {{-- Hiển thị thông báo nếu có --}}
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        @if(session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
-
+        @include('layouts.alert')
         <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
         </div>
