@@ -43,5 +43,14 @@ Route::middleware(['auth', 'is_admin'])->group(function (){
 });
 
 use App\Http\Controllers\ProductPublicController;
-Route::get('/products',[ProductPublicController::class,'index'])->name('products.public');
+Route::get('/',[ProductPublicController::class,'index'])->name('products.public');
 Route::get('/products/{product}',[ProductPublicController::class,'show'])->name('products.public.show');
+
+use App\Http\Controllers\User\CartController;
+Route::middleware(['auth'])->group(function (){
+    Route::get('/cart',[CartController::class,'index'])->name('cart.index');
+    Route::post('/cart/add',[CartController::class,'addToCart'])->name('cart.add');
+    Route::delete('/cart/remove/{id}',[CartController::class,'remove'])->name('cart.remove');
+    Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+});

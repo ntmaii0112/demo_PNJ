@@ -20,15 +20,13 @@ class LoginController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return response()->json(['success' => true]);
+            return redirect()->route('products.public')->with('success','Login success!');
         }
         Log::info('Login failed',[
             'email' => $credentials['email'],
         ]);
-        return response()->json([
-            'success' => false,
-            'message' => 'Email hoặc mật khẩu không đúng.'
-        ], 401);
+        return back()->withErrors(['email'=> 'Thông tin đăng nhập không đúng']);
+
     }
 
     public function showForgotPasswordForm()

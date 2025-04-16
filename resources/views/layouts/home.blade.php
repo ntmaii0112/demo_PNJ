@@ -32,9 +32,15 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-center">
-                <li class="nav-item"><a class="nav-link active fw-bold" href="{{ route('products.public') }}">SẢN PHẨM</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('products.public') }}">SẢN PHẨM</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">ĐƠN HÀNG</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">GIỎ HÀNG 🛒</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('cart.index')}}">GIỎ HÀNG 🛒
+                        @if($cartCount > 0)
+                            <span class="badge bg-danger">{{ $cartCount }}</span>
+                        @endif
+                    </a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="{{route('register.form')}}">ĐĂNG KÝ</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('login.form')}}">ĐĂNG NHẬP</a></li>
             </ul>

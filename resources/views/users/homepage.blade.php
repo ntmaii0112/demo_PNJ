@@ -33,7 +33,12 @@
                             <p class="text-decoration-line-through text-secondary">Giá gốc: {{ number_format($product->originalPrice, 0) }}VND</p>
                             <p class="text-danger fw-bold">Giá bán: {{ number_format($product->salePrice, 0) }}VND</p>
                             <div class="d-flex justify-content-between">
-                                <a href="#" class="btn btn-warning">THÊM VÀO GIỎ</a>
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-warning">THÊM VÀO GIỎ</button>
+                                </form>
                                 <a href="{{route('products.public.show',$product)}}" class="btn btn-dark">XEM CHI TIẾT</a>
                             </div>
                         </div>
