@@ -23,7 +23,6 @@ class User extends Authenticatable
         'password',
         'address',
         'dob',
-        'role_id',
         'status',
         'isConfirmed',
         'captcha',
@@ -58,38 +57,43 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function getAllRoleAttribute(){
-        $role = $this->roles()->pluck('name')->toArray();
-        //Luôn có role_id mặc định
-
-        $defaultRole = Role::find($this->role_id);
-        if($defaultRole && !in_array($defaultRole->name, $role)){
-            array_push($role, $defaultRole->name);
-        }
-        return $role;
+    public function isAdmin()
+    {
+        return $this->roles->contains('name', 'admin');
     }
-    // Kiểm tra xem user có role với tên cụ thể hay ko?
-    // exists() giúp truy vấn nhanh không ần lấy toàn bộ dự liệu
+
+//    public function getAllRoleAttribute(){
+//        $role = $this->roles()->pluck('name')->toArray();
+//        //Luôn có role_id mặc định
+//
+//        $defaultRole = Role::find($this->role_id);
+//        if($defaultRole && !in_array($defaultRole->name, $role)){
+//            array_push($role, $defaultRole->name);
+//        }
+//        return $role;
+//    }
+//    // Kiểm tra xem user có role với tên cụ thể hay ko?
+//    // exists() giúp truy vấn nhanh không ần lấy toàn bộ dự liệu
     public function hasRole($roleName){
         return $this->roles()->where('name', $roleName)->exists();
     }
-    public function assignRole($roleName)
-    {
-        // Gắn 1 vai trò có tên là $roleName cho user hiện tại
-        $role = Role::where('name', $roleName)->first();
-        // Nếu role đó tồn tại && user chưa có role nào
-        if ($role && !$this->hasRole($roleName)) {
-            $this->roles()->attach($role);
-        }
-    }
-
-    public function removeRole($roleName){
-        $role = Role::where('name', $roleName)->first();
-        //Xóa role khoi user, nếu role đó tồn tại, Ko cần ktra user có role đó hay ko?
-        // detach() sẽ ử lý an toàn
-        if($role){
-            $this->roles()->detach($role);
-        }
-    }
+//    public function assignRole($roleName)
+//    {
+//        // Gắn 1 vai trò có tên là $roleName cho user hiện tại
+//        $role = Role::where('name', $roleName)->first();
+//        // Nếu role đó tồn tại && user chưa có role nào
+//        if ($role && !$this->hasRole($roleName)) {
+//            $this->roles()->attach($role);
+//        }
+//    }
+//
+//    public function removeRole($roleName){
+//        $role = Role::where('name', $roleName)->first();
+//        //Xóa role khoi user, nếu role đó tồn tại, Ko cần ktra user có role đó hay ko?
+//        // detach() sẽ ử lý an toàn
+//        if($role){
+//            $this->roles()->detach($role);
+//        }
+//    }
 
 }

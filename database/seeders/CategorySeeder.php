@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
     {
         $categories = ['Nhẫn','Dây chuyền','Bông tai','Vòng tay'];
         foreach ($categories as $category) {
-            Category::create(['name'=>$category]);
+            Category::firstOrCreate(['name'=>$category]);
         }
     }
 }

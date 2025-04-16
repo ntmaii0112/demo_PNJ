@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     public function checkEmail(Request $request)
@@ -33,11 +33,13 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
             'address' => $request->address,
             'dob' => $request->dob,
-            'role_id' => 2,
             'status' => 1,
             'isConfirmed' => 0,
             'captcha' => '',
         ]);
+
+        $user->roles()->attach(2);
+        Auth::login($user);
 
         if ($user) {
             Log::info("Register success for user: {$user->email}");

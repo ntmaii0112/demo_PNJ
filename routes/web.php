@@ -54,3 +54,8 @@ Route::middleware(['auth'])->group(function (){
     Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
 });
+
+use App\Http\Controllers\User\UserController;
+Route::middleware(['auth'])->group(function (){
+    Route::get('/profile',[UserController::class,'profile'])->name('user.profile');
+});
