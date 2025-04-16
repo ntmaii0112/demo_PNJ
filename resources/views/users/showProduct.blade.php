@@ -28,10 +28,11 @@
                     <h5 class="fw-bold">Mô tả sản phẩm:</h5>
                     <p>{{ $product->description }}</p>
                 @endif
-
-                <form action="" method="POST" class="mt-3">
+                <form action="{{ route('cart.add') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-success">Thêm vào giỏ</button>
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-warning">THÊM VÀO GIỎ</button>
                 </form>
             </div>
         </div>
