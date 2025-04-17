@@ -24,6 +24,8 @@ Route::post('/check-email', [RegisterController::class, 'checkEmail'])->name('ch
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 use App\Http\Controllers\User\UserRoleController;
 
 Route::middleware(['auth', 'is_admin'])->group(function () {
@@ -61,7 +63,13 @@ Route::middleware(['auth'])->group(function (){
 });
 
 use App\Http\Controllers\User\OrderController;
+
 Route::middleware(['auth'])->group(function (){
-    Route::post('/orders',[OrderController::class,'createOrder'])->name('orders.create');
     Route::get('/orders',[OrderController::class,'show'])->name('orders.show');
+    Route::post('/orders',[OrderController::class,'createOrder'])->name('orders.create');
+});
+
+Route::middleware(['auth','is_admin'])->group(function (){
+    Route::get('admin/orders',[OrderController::class,'index'])->name('admin.orders.index');
+    Route::post('admin/orders/{id}/updateStatus',[OrderController::class,'updateStatus'])->name('admin.orders.updateStatus');
 });

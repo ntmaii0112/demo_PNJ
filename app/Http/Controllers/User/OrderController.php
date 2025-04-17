@@ -63,4 +63,23 @@ class OrderController extends Controller
         $orders = Order::with('user')->where('user_id',Auth::id())->get();
         return view('users.orders.show', compact('orders'));
     }
+
+    public function index(){
+        $orders = Order::with('user')->get();
+
+        return view('admin.orders.index',compact('orders'));
+    }
+    public function updateStatus(Request $request,$id){
+        //Lâấy đơn hàng từ DB
+        $order = Order::findOrFail($id);
+
+        //Kiểm tra xam trạng tháu gửi lên có hợp lệ hay ko
+        $validated = $request->validate([
+            'status' => 'required|in:ordered,delivering,completed,cancelled',
+        ]);
+        $order->status = $request->input('status');
+        $order->save();
+
+        return back()->with('success','Order status updated successfully');
+    }
 }

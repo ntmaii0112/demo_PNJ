@@ -12,7 +12,7 @@
         <a class="btn btn-outline-primary" href="{{ route('admin.index') }}">Quản lý Role</a>
         <a class="btn btn-outline-primary" href="{{ route('category.index') }}">Quản lý danh mục</a>
         <a class="btn btn-outline-primary" href="{{ route('product.index') }}">Quản lý sản phẩm</a>
-        <a class="btn btn-outline-primary" href="{{ route('admin.index') }}">Quản lý đơn hàng</a>
+        <a class="btn btn-outline-primary" href="{{ route('admin.orders.index') }}">Quản lý đơn hàng</a>
         <a class="btn btn-outline-primary" href="{{ route('products.public') }}">Chuyển về trang chủ</a>
 
     </div>
