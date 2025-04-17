@@ -59,3 +59,9 @@ use App\Http\Controllers\User\UserController;
 Route::middleware(['auth'])->group(function (){
     Route::get('/profile',[UserController::class,'profile'])->name('user.profile');
 });
+
+use App\Http\Controllers\User\OrderController;
+Route::middleware(['auth'])->group(function (){
+    Route::post('/orders',[OrderController::class,'createOrder'])->name('orders.create');
+    Route::get('/orders',[OrderController::class,'show'])->name('orders.show');
+});

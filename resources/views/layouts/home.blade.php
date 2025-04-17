@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item"><a class="nav-link" href="{{ route('products.public') }}">SẢN PHẨM</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">ĐƠN HÀNG</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('orders.show') }}">ĐƠN HÀNG</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('cart.index')}}">GIỎ HÀNG 🛒
                         @if($cartCount > 0)
