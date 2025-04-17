@@ -42,8 +42,15 @@
                     </a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{route('user.profile')}}">PROFILE</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{route('register.form')}}">ĐĂNG KÝ</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{route('login.form')}}">ĐĂNG NHẬP</a></li>
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('register.form')}}">ĐĂNG KÝ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('login.form')}}">ĐĂNG NHẬP</a>
+                    </li>
+                @endguest
+
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">LOGOUT</a>
