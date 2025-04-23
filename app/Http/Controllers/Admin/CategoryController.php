@@ -23,6 +23,7 @@ class CategoryController extends Controller
 
 //        $Category = Category::active()->orderBy('id','desc')->paginate(10);
         return view('admin.category.index',compact('Category','search'));
+        // return view('', ['Category'=> $Category])
     }
 
     /**
